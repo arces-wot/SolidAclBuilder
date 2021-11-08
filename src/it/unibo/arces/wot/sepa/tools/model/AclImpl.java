@@ -1,15 +1,16 @@
 package it.unibo.arces.wot.sepa.tools.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class Acl {
+public class AclImpl implements Acl {
 
 	private String risorsa;  //campo
 	private List<Regola> regole = new ArrayList<>();  //campo insieme di regole
 	 
 	
-	public Acl (String risorsa) { //costruttore
+	public AclImpl (String risorsa) { //costruttore
 		this.risorsa= risorsa;
 	}
 	
@@ -29,5 +30,8 @@ public class Acl {
 		this.regole.remove( regolaDaEliminare );
 	}
 	
+	public List<Regola> getListaRegole() {  //metodo get per vedere la lista da fuori
+		return Collections.unmodifiableList(this.regole);
+	}
 }
 

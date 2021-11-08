@@ -1,20 +1,17 @@
 package it.unibo.arces.wot.sepa.tools.model;
 
-import java.util.HashSet;
-import java.util.Set;
 
 public class RegolaClasse {
 
-private Set<TipoDiClasse> agentClass = new HashSet<>();        //insieme dei permessi
+	private TipoDiClasse agentClass;        //insieme dei permessi
 	
 	
-	public void Imposta (TipoDiClasse agentClass) {
-		this.agentClass.add( agentClass );
+	public void  setAgentClass ( TipoDiClasse agentClass) {
+		this.agentClass= agentClass ;
 		
 	}
 	
-	public void eliminaPermesso (TipoDiClasse agentClass) {
-		this.agentClass.remove( agentClass );
-		
+	public TipoDiClasse getAgentClass() {
+		return this.agentClass;
 	}
 }

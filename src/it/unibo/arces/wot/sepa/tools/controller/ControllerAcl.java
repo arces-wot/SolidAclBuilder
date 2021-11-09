@@ -3,9 +3,9 @@ package it.unibo.arces.wot.sepa.tools.controller;
 public interface ControllerAcl  {
 	
 	void generaAcl();
-	void aggiungiRegolaSemplice();
-	void aggiungiRegolaGruppo();
-	void aggiungiRegolaClasse();
+	ControllerRegolaSemplice aggiungiRegolaSemplice();
+	ControllerRegolaGruppo aggiungiRegolaGruppo();
+	ControllerRegolaClasse aggiungiRegolaClasse();
 	void inserisciUrlRisorsa(String urlRisorsa );
 	
 }

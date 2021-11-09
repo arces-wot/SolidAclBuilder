@@ -1,7 +1,7 @@
 package it.unibo.arces.wot.sepa.tools.model;
 
 
-public class RegolaClasse {
+public class RegolaClasse extends Regola {
 
 	private TipoDiClasse agentClass;        //insieme dei permessi
 	

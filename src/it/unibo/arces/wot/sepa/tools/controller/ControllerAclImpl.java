@@ -1,7 +1,10 @@
 package it.unibo.arces.wot.sepa.tools.controller;
 
 import it.unibo.arces.wot.sepa.tools.model.Acl;
+import it.unibo.arces.wot.sepa.tools.model.RegolaClasse;
+import it.unibo.arces.wot.sepa.tools.model.RegolaGruppo;
 import it.unibo.arces.wot.sepa.tools.model.RegolaSemplice;
+import it.unibo.arces.wot.sepa.tools.model.TipoDiClasse;
 
 public class ControllerAclImpl implements ControllerAcl {
 
@@ -19,26 +22,35 @@ public class ControllerAclImpl implements ControllerAcl {
 	@Override
 	public ControllerRegolaSemplice aggiungiRegolaSemplice() {
 		
-		this.acl.aggiungiRegola( new RegolaSemplice("") );
+		RegolaSemplice regola = new RegolaSemplice("");
+		this.acl.aggiungiRegola(regola);
+		return new ControllerRegolaSempliceImpl(regola)  ;
 		
 	}
 
 	@Override
-	public void aggiungiRegolaGruppo() {
-		// TODO Auto-generated method stub
+	public ControllerRegolaGruppo aggiungiRegolaGruppo() {
+		RegolaGruppo regola = new RegolaGruppo("");
+		this.acl.aggiungiRegola(regola);
+		return new ControllerRegolaGruppoImpl(regola)  ;
+			
 
 	}
 
 	@Override
-	public void aggiungiRegolaClasse() {
-		// TODO Auto-generated method stub
+	public ControllerRegolaClasse aggiungiRegolaClasse() {
+		
+		RegolaClasse regola = new RegolaClasse(TipoDiClasse.PUBBLICA);
+	    this.acl.aggiungiRegola(regola);
+		return new ControllerRegolaClasseImpl(regola);
 
 	}
 
 	@Override
 	public void inserisciUrlRisorsa(String urlRisorsa) {
-		// TODO Auto-generated method stub
-
+		
+		this.acl.setRisorsa(urlRisorsa);
+		
 	}
 
 }

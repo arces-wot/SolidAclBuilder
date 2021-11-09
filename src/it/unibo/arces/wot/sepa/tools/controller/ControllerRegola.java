@@ -6,6 +6,6 @@ public interface ControllerRegola {
 
 	void inserisciPermesso(TipoDiPermesso permesso);
 	void rimuoviPermesso(TipoDiPermesso permesso);
-
+    void eliminaRegola();
 }
 

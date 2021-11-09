@@ -7,5 +7,5 @@ public interface ControllerAcl  {
 	ControllerRegolaGruppo aggiungiRegolaGruppo();
 	ControllerRegolaClasse aggiungiRegolaClasse();
 	void inserisciUrlRisorsa(String urlRisorsa );
-	
+
 }

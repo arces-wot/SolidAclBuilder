@@ -24,7 +24,7 @@ public class ControllerAclImpl implements ControllerAcl {
 		
 		RegolaSemplice regola = new RegolaSemplice("");
 		this.acl.aggiungiRegola(regola);
-		return new ControllerRegolaSempliceImpl(regola)  ;
+		return new ControllerRegolaSempliceImpl(regola, this.acl)  ;
 		
 	}
 
@@ -32,7 +32,7 @@ public class ControllerAclImpl implements ControllerAcl {
 	public ControllerRegolaGruppo aggiungiRegolaGruppo() {
 		RegolaGruppo regola = new RegolaGruppo("");
 		this.acl.aggiungiRegola(regola);
-		return new ControllerRegolaGruppoImpl(regola)  ;
+		return new ControllerRegolaGruppoImpl(regola, this.acl)  ;
 			
 
 	}
@@ -42,7 +42,7 @@ public class ControllerAclImpl implements ControllerAcl {
 		
 		RegolaClasse regola = new RegolaClasse(TipoDiClasse.PUBBLICA);
 	    this.acl.aggiungiRegola(regola);
-		return new ControllerRegolaClasseImpl(regola);
+		return new ControllerRegolaClasseImpl(regola, this.acl);
 
 	}
 

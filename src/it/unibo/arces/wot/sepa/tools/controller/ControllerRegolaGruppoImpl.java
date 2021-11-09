@@ -1,13 +1,14 @@
 package it.unibo.arces.wot.sepa.tools.controller;
 
+import it.unibo.arces.wot.sepa.tools.model.Acl;
 import it.unibo.arces.wot.sepa.tools.model.RegolaGruppo;
 
 public class ControllerRegolaGruppoImpl 
 	extends ControllerRegolaImpl<RegolaGruppo> 
 	implements ControllerRegolaGruppo {
 
-	public ControllerRegolaGruppoImpl(RegolaGruppo regola) {
-		super(regola);
+	public ControllerRegolaGruppoImpl(RegolaGruppo regola, Acl acl) {
+		super(regola, acl);
 	}
 
 	@Override

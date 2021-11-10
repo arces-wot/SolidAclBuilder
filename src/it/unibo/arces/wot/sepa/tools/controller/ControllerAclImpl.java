@@ -15,7 +15,7 @@ public class ControllerAclImpl implements ControllerAcl {
 		
 	}
 	@Override
-	public void generaAcl() {   //Qui serve la traduzione di Jena
+	public void generaAcl() {   // Qui serve la traduzione di Jena
 		
 	}
 

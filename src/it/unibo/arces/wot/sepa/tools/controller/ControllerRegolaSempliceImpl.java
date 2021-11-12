@@ -7,15 +7,12 @@ public class ControllerRegolaSempliceImpl
 	extends ControllerRegolaImpl<RegolaSemplice>
 	implements ControllerRegolaSemplice  {
 
-	public ControllerRegolaSempliceImpl(RegolaSemplice regola, Acl acl) {    //uìqui il generico diventa spacifico ed regola Semplice
-		super(regola, acl);
+	public ControllerRegolaSempliceImpl(RegolaSemplice regola, Acl acl) { //qui il generico diventa specifico 
+		super(regola, acl);                                               //di regola Semplice
 	}
 
 	@Override
 	public void inserisciUserWebId(String userWebId) {
 		this.regola.setUserWebId(userWebId);
 	}
-
-	
-
 }

@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 
 import it.unibo.arces.wot.sepa.tools.controller.ControllerAcl;
 
+import java.awt.*;
+
 public class SwingView implements ViewAcl {
 	private ControllerAcl controllerAcl;
 	private JFrame frame;

@@ -7,8 +7,8 @@ import java.awt.*;
 
 public class RegolaGruppoSwing extends RegolaSwing<ControllerRegolaGruppo> {
 
-    public RegolaGruppoSwing(ControllerRegolaGruppo controller) {
-        super(controller);
+    public RegolaGruppoSwing(ControllerRegolaGruppo controller, JPanel containerPanel) {
+        super(controller,containerPanel);
     }
 
     @Override

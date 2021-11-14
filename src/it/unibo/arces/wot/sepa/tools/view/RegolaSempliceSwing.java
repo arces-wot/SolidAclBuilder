@@ -8,8 +8,8 @@ import java.awt.*;
 public class RegolaSempliceSwing extends RegolaSwing<ControllerRegolaSemplice> {
 
 
-    public RegolaSempliceSwing(ControllerRegolaSemplice controller) {
-        super(controller);
+    public RegolaSempliceSwing(ControllerRegolaSemplice controller,JPanel containerPanel) {
+        super(controller,containerPanel);
     }
 
     @Override

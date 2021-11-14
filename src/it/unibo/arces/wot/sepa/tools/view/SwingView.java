@@ -1,7 +1,15 @@
 package it.unibo.arces.wot.sepa.tools.view;
 import it.unibo.arces.wot.sepa.tools.controller.ControllerAcl;
+import it.unibo.arces.wot.sepa.tools.controller.ControllerRegolaClasse;
+import it.unibo.arces.wot.sepa.tools.controller.ControllerRegolaGruppo;
+import it.unibo.arces.wot.sepa.tools.controller.ControllerRegolaSemplice;
+
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SwingView implements ViewAcl {
 	private ControllerAcl controllerAcl;
@@ -15,13 +23,7 @@ public class SwingView implements ViewAcl {
 		this.frame.add(createMainPanel());
 		this.frame.setLocation(300,300);
 		this.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-		this.regolePanel.add(new RegolaSempliceSwing(null));
-		this.regolePanel.add(new RegolaSempliceSwing(null));
-		this.regolePanel.add(new RegolaClasseSwing(null));
-		this.regolePanel.add(new RegolaGruppoSwing(null));
-
-
+		this.frame.setMinimumSize(new Dimension(650, 300));
 	}
 
 	private JPanel createMainPanel (){
@@ -48,7 +50,7 @@ public class SwingView implements ViewAcl {
 
 	private JButton createGenerateAclButton (){
 		JButton aclButton =new JButton("Generate ACL");
-		//eventlistener
+		//TODO: implemetanre ACL
 		return aclButton;
 
 	}
@@ -63,17 +65,32 @@ public class SwingView implements ViewAcl {
 
 	private JButton createButtonRegolaSemplice(){
 		JButton regolaSempliceButton = new JButton("Regola Semplice");
+		regolaSempliceButton.addActionListener( e -> {
+			ControllerRegolaSemplice controllerRegola = this.controllerAcl.aggiungiRegolaSemplice();
+			this.regolePanel.add(new RegolaSempliceSwing(controllerRegola, this.regolePanel));
+			this.regolePanel.revalidate();
+		});
 		return regolaSempliceButton;
 	}
 
 	private JButton createButtonRegolaGruppo(){
 		JButton regolaGruppoButton = new JButton("Regola Gruppo");
+		regolaGruppoButton.addActionListener(e -> {
+			ControllerRegolaGruppo controllerRegola = this.controllerAcl.aggiungiRegolaGruppo();
+			this.regolePanel.add(new RegolaGruppoSwing(controllerRegola, this.regolePanel));
+			this.regolePanel.revalidate();
+		});
 		return regolaGruppoButton;
 	}
 
 	private JButton createButtonRegolaClasse(){
-		JButton regolaGruppoButton = new JButton("Regola Classe");
-		return regolaGruppoButton;
+		JButton regolaClasseButton = new JButton("Regola Classe");
+		regolaClasseButton.addActionListener(e -> {
+			ControllerRegolaClasse controllerRegola = this.controllerAcl.aggiungiRegolaClasse();
+			this.regolePanel.add(new RegolaClasseSwing(controllerRegola, this.regolePanel));
+			this.regolePanel.revalidate();
+		});
+		return regolaClasseButton;
 	}
 
 	private JPanel createRisorsaPanel(){
@@ -81,30 +98,30 @@ public class SwingView implements ViewAcl {
 		JTextField urlRisorsa = new JTextField("");
 		risorsaPanel.add(urlRisorsa, BorderLayout.CENTER);
 		risorsaPanel.add(new JLabel("Risorsa Protetta"), BorderLayout.WEST);
+		urlRisorsa.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				controllerAcl.inserisciUrlRisorsa(urlRisorsa.getText());
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				controllerAcl.inserisciUrlRisorsa(urlRisorsa.getText());
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				controllerAcl.inserisciUrlRisorsa(urlRisorsa.getText());
+			}
+		});
 		return risorsaPanel;
 	}
 
-	//private JPanel createRegolaPanel (){
-	//	JPanel regolaPanel =new JPanel (new BorderLayout());
-		//regolaPanel.add(new JLabel("Permessi"), BorderLayout.WEST);
-		//regolaPanel.add(creationCheckBoxPanel(), BorderLayout.CENTER);
-		//regolaPanel.add( new JButton("Delete"), BorderLayout.EAST);
-		//regolaPanel.add( creationAgentPanel(), BorderLayout.SOUTH );
-	//	return regolaPanel;
-	//}
-
-	private JPanel creationAgentPanel(){
-		JPanel agentPanel =new JPanel (new BorderLayout());
-		JTextField agent = new JTextField("");
-		agentPanel.add(new JLabel("Agent"),BorderLayout.WEST);
-		agentPanel.add(agent, BorderLayout.CENTER);
-		return agentPanel;
-	}
 
 
 	@Override
 	public void startGui(ControllerAcl controllerAcl) {
-
+        this.controllerAcl=controllerAcl;
 		this.frame.setVisible(true);
 
 	}

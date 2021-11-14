@@ -8,7 +8,12 @@ import java.awt.*;
 
 public abstract class RegolaSwing<T extends ControllerRegola> extends JPanel {
 
-    public RegolaSwing(T controller) {
+    protected T controller;
+    protected JPanel containerPanel;
+
+    public RegolaSwing(T controller, JPanel containerPanel) {
+        this.controller = controller;
+        this.containerPanel= containerPanel;
         this.setLayout( new BoxLayout( this,BoxLayout.PAGE_AXIS));
         JPanel  topRow = new JPanel(new BorderLayout());
         topRow.add( new JLabel ("Permessi"), BorderLayout.WEST);
@@ -20,8 +25,14 @@ public abstract class RegolaSwing<T extends ControllerRegola> extends JPanel {
     }
 
     private JButton createDeleteButton() {
+        JButton deleteButton = new JButton("Delete");
+        deleteButton.addActionListener( e-> {
 
-        return new JButton("Delete");
+            controller.eliminaRegola();
+            this.containerPanel.remove(this);
+            this.containerPanel.repaint();
+        });
+        return deleteButton;
     }
 
     private JPanel createCheckBoxPanel(){
@@ -29,6 +40,13 @@ public abstract class RegolaSwing<T extends ControllerRegola> extends JPanel {
         for (TipoDiPermesso permesso : TipoDiPermesso.values()){
             JCheckBox checkBox =new JCheckBox(permesso.toString());
             checkBoxPanel.add(checkBox);
+            checkBox.addActionListener(e->{
+                if(checkBox.isSelected()){
+                    controller.inserisciPermesso(permesso);
+                } else{
+                    controller.rimuoviPermesso(permesso);
+                }
+            });
         }
         return checkBoxPanel;
 

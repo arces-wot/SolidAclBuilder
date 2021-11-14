@@ -1,27 +1,25 @@
 package it.unibo.arces.wot.sepa.tools.view;
-
-import javax.swing.*;
-
 import it.unibo.arces.wot.sepa.tools.controller.ControllerAcl;
-
+import javax.swing.*;
 import java.awt.*;
 
 public class SwingView implements ViewAcl {
 	private ControllerAcl controllerAcl;
 	private JFrame frame;
-	
-	
+	private JPanel  regolePanel;
+
 	public SwingView () {  //costruttore
 	
 		this.frame= new JFrame("ACL GENERATOR") ;
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.add(createMainPanel());
-		this.frame.pack();
 		this.frame.setLocation(300,300);
-		//this.frame.add(main);
+		this.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-
-
+		this.regolePanel.add(new RegolaSempliceSwing(null));
+		this.regolePanel.add(new RegolaSempliceSwing(null));
+		this.regolePanel.add(new RegolaClasseSwing(null));
+		this.regolePanel.add(new RegolaGruppoSwing(null));
 
 
 	}
@@ -29,7 +27,13 @@ public class SwingView implements ViewAcl {
 	private JPanel createMainPanel (){
 		JPanel main = new JPanel (new BorderLayout());
 		main.add(createActionPanel(), BorderLayout.NORTH);
-		main.add(createRegolaPanel(),BorderLayout.CENTER);
+		this.regolePanel = new JPanel();
+		this.regolePanel.setLayout(new BoxLayout(this.regolePanel, BoxLayout.PAGE_AXIS));
+		JScrollPane scrollPanel = new JScrollPane(
+				this.regolePanel,
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		main.add(scrollPanel, BorderLayout.CENTER);
 		return main ;
 	}
 
@@ -80,17 +84,14 @@ public class SwingView implements ViewAcl {
 		return risorsaPanel;
 	}
 
-	private JPanel createRegolaPanel (){
-		JPanel regolaPanel =new JPanel (new BorderLayout());
-		JCheckBox tipoPermessi =new JCheckBox("scrittura" ); //mancano dei permessi
-		regolaPanel.add(new JLabel("Permessi"), BorderLayout.WEST);
-		regolaPanel.add(tipoPermessi, BorderLayout.CENTER);
-		regolaPanel.add( new JButton("Delete"), BorderLayout.EAST);
-		regolaPanel.add( creationAgentPanel(), BorderLayout.SOUTH );
-
-		return regolaPanel;
-	}
-
+	//private JPanel createRegolaPanel (){
+	//	JPanel regolaPanel =new JPanel (new BorderLayout());
+		//regolaPanel.add(new JLabel("Permessi"), BorderLayout.WEST);
+		//regolaPanel.add(creationCheckBoxPanel(), BorderLayout.CENTER);
+		//regolaPanel.add( new JButton("Delete"), BorderLayout.EAST);
+		//regolaPanel.add( creationAgentPanel(), BorderLayout.SOUTH );
+	//	return regolaPanel;
+	//}
 
 	private JPanel creationAgentPanel(){
 		JPanel agentPanel =new JPanel (new BorderLayout());
@@ -103,7 +104,7 @@ public class SwingView implements ViewAcl {
 
 	@Override
 	public void startGui(ControllerAcl controllerAcl) {
-		
+
 		this.frame.setVisible(true);
 
 	}

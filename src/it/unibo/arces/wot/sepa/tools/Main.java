@@ -1,5 +1,4 @@
 package it.unibo.arces.wot.sepa.tools;
-
 import it.unibo.arces.wot.sepa.tools.controller.ControllerAcl;
 import it.unibo.arces.wot.sepa.tools.controller.ControllerAclImpl;
 import it.unibo.arces.wot.sepa.tools.model.Acl;
@@ -17,7 +16,6 @@ public class Main {
 		
 		ViewAcl viewAcl = new SwingView(); 
 		viewAcl.startGui(controllerAcl);
-		
 	}
 
 }

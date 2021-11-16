@@ -1,5 +1,4 @@
 package it.unibo.arces.wot.sepa.tools.view;
-
 import it.unibo.arces.wot.sepa.tools.controller.ControllerRegola;
 import it.unibo.arces.wot.sepa.tools.model.TipoDiPermesso;
 
@@ -24,17 +23,6 @@ public abstract class RegolaSwing<T extends ControllerRegola> extends JPanel {
         this.setMaximumSize(new Dimension(Integer.MAX_VALUE, (int) this.getPreferredSize().getHeight()));
     }
 
-    private JButton createDeleteButton() {
-        JButton deleteButton = new JButton("Delete");
-        deleteButton.addActionListener( e-> {
-
-            controller.eliminaRegola();
-            this.containerPanel.remove(this);
-            this.containerPanel.repaint();
-        });
-        return deleteButton;
-    }
-
     private JPanel createCheckBoxPanel(){
         JPanel checkBoxPanel = new JPanel(new FlowLayout());
         for (TipoDiPermesso permesso : TipoDiPermesso.values()){
@@ -49,8 +37,18 @@ public abstract class RegolaSwing<T extends ControllerRegola> extends JPanel {
             });
         }
         return checkBoxPanel;
-
     }
+    private JButton createDeleteButton() {
+        JButton deleteButton = new JButton("Delete");
+        deleteButton.addActionListener( e-> {
 
+            this.controller.eliminaRegola();
+            this.containerPanel.remove(this);
+            this.containerPanel.revalidate();
+            this.containerPanel.repaint();
+
+        });
+        return deleteButton;
+    }
     protected abstract JPanel createRegolaEditorPanel();
 }

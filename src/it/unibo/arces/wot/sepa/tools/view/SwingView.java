@@ -50,7 +50,7 @@ public class SwingView implements ViewAcl {
 
 	private JButton createGenerateAclButton (){
 		JButton aclButton =new JButton("Generate ACL");
-		//TODO: implemetanre ACL
+		aclButton.addActionListener(e->this.controllerAcl.generaAcl());
 		return aclButton;
 
 	}
@@ -117,13 +117,10 @@ public class SwingView implements ViewAcl {
 		return risorsaPanel;
 	}
 
-
-
 	@Override
 	public void startGui(ControllerAcl controllerAcl) {
         this.controllerAcl=controllerAcl;
 		this.frame.setVisible(true);
-
 	}
 	
 
